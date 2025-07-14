@@ -8,4 +8,17 @@ mydb = mysql.connector.connect(
 )
 
 mycursor  = mydb.cursor()
-sql = 
+# sql = "DELETE FROM customers WHERE address = 'Karachi'"
+# mycursor.execute(sql)
+# mydb.commit()
+
+# print( mycursor.rowcount)
+
+# to prevent injection to escape Characters
+
+sql =  "DELETE FROM customers WHERE address= %s"
+adr = ("New York",)
+
+mycursor.execute(sql, adr)
+mydb.commit()
+print(mycursor.rowcount, "records Deleted" )
